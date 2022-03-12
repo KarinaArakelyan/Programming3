@@ -1,4 +1,4 @@
-class Grass {
+class LivingCreature {
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -14,19 +14,23 @@ class Grass {
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(character) {
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
+
+    chooseCell(ch) {
+        var found = [];
+        for (var i in this.directions) {
+            var x = this.directions[i][0];
+            var y = this.directions[i][1];
             if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
+                if (matrix[y][x] == ch) {
                     found.push(this.directions[i]);
                 }
             }
         }
         return found;
     }
+}
+
+class Grass extends LivingCreature {
     mul() {
         this.multiply++;
         let emptyCells = this.chooseCell(0);
@@ -42,14 +46,12 @@ class Grass {
             this.multiply = 0;
         }
     }
-
 }
-/////Xotaker
 
-class GrassEater {
+/////Xotaker
+class GrassEater extends LivingCreature {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x, y)
         this.directions = [];
         this.energy = 6;
     }
@@ -65,20 +67,6 @@ class GrassEater {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-    }
-
-    chooseCell(character) {
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
     }
     move() {
         this.getNewCoordinates();
@@ -136,11 +124,8 @@ class GrassEater {
                     grassArr.splice(i, 1);
                     break;
                 }
-
             }
-        }
-
-        else {
+        } else {
             this.move();
         }
     }
@@ -157,10 +142,9 @@ class GrassEater {
 }
 ///////Gishatich
 
-class Predator {
+class Predator extends LivingCreature {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.directions = [];
         this.energy = 8;
     }
@@ -178,19 +162,6 @@ class Predator {
         ];
     }
 
-    chooseCell(character) {
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
     move() {
         this.getNewCoordinates();
         this.energy--;
@@ -212,6 +183,7 @@ class Predator {
             }
         }
     }
+
     mul() {
         let emptyCells = this.chooseCell(0);
         let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
@@ -267,10 +239,9 @@ class Predator {
 }
 ////Nor kerpar 1
 
-class Hunter {
+class Hunter extends LivingCreature {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.directions = [];
         this.energy = 10;
     }
@@ -288,19 +259,6 @@ class Hunter {
         ];
     }
 
-    chooseCell(character) {
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
     move() {
         this.getNewCoordinates();
         this.energy--;
@@ -322,6 +280,7 @@ class Hunter {
             }
         }
     }
+    
     mul() {
         let emptyCells = this.chooseCell(0);
         let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
@@ -384,10 +343,9 @@ class Hunter {
 }
 ////Nor kerpar 2
 
-class NorKerpar {
+class NorKerpar extends LivingCreature {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.directions = [];
         this.energy = 10;
     }
@@ -401,20 +359,6 @@ class NorKerpar {
         ];
     }
 
-    chooseCell(character) {
-        this.getNewCoordinates();
-        let found = [];
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
     move() {
         this.getNewCoordinates();
         this.energy++;
@@ -428,10 +372,10 @@ class NorKerpar {
             matrix[newY][newX] = matrix[this.y][this.x];
             matrix[this.y][this.x] = 0;
 
-            this.x ++;
+            this.x++;
             // this.y = newY;
         }
-        else  {
+        else {
             if (this.x == matrix[this.y].length) {
                 this.die();
             }
@@ -457,7 +401,7 @@ class NorKerpar {
         let emptyCells = this.chooseCell(1);
         let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
-        if (newCell ) {
+        if (newCell) {
             // this.energy++;
             let newX = newCell[0];
             let newY = newCell[1];
