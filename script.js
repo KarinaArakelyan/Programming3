@@ -2,6 +2,9 @@ let matrix = [];
 let n = 20;
 let m = 20;
 
+
+var socket = io();
+
 for (let y = 0; y < n; y++) {
     matrix[y] = [];
     for (let x = 0; x < m; x++) {
@@ -20,46 +23,18 @@ for (let y = 0; y < n; y++) {
     }
 }
 
-let side = 20;
-
-let grassArr = [];
-let grassEaterArr = [];
-let predatorArr = [];
-let norKerparArr = [];
-let hunterArr = [];
-
 function setup() {
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
     frameRate(10);
-
-    for (let y = 0; y < matrix.length; ++y) {
-        for (let x = 0; x < matrix[y].length; ++x) {
-            if (matrix[y][x] == 1) {
-                let gr = new Grass(x, y);
-                grassArr.push(gr);
-            } else if (matrix[y][x] == 2) {
-                let gr = new GrassEater(x, y);
-                grassEaterArr.push(gr);
-            } else if (matrix[y][x] == 3) {
-                let gr = new Predator(x, y);
-                predatorArr.push(gr);
-            } else if (matrix[y][x] == 4) {
-                let gr = new NorKerpar(x, y);
-                norKerparArr.push(gr);
-            } else if (matrix[y][x] == 5) {
-                let gr = new Hunter(x, y);
-                hunterArr.push(gr);
-            }
-        }
-    }
-
 }
 
-function draw() {
+
+let side = 20;
+
+function nkarel(matrix) {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
-
             if (matrix[y][x] == 0) {
                 fill("#acacac");
             }
@@ -88,27 +63,12 @@ function draw() {
             text(x+" "+y, x*side+side/2,y*side+side/2)
             */
         }
-
-    }
-    for (let i in grassArr) {
-        try { grassArr[i].mul() } catch (err) { continue };
-    }
-    for (let i in grassEaterArr) {
-        try { grassEaterArr[i].eat() } catch (err) { continue };
-        try { grassEaterArr[i].mul() } catch (err) { continue };
-    }
-    for (let i in predatorArr) {
-        try { predatorArr[i].eat() } catch (err) { continue };
-        try { predatorArr[i].mul() } catch (err) { continue };
-    }
-    for (let i in norKerparArr) {
-        console.log(norKerparArr[i]);
-        try { norKerparArr[i].eat() } catch (err) { continue };
-        // try { norKerparArr[i].mul() } catch (err) { continue };
-    }
-    for (let i in hunterArr) {
-        try { hunterArr[i].eat() } catch (err) { continue };
-        try { hunterArr[i].mul() } catch (err) { continue };
     }
 }
+socket.on("send matrix", nkarel);
 
+
+socket.on('connection', function (socket) {
+    nkarel(matrix);
+});
+                         

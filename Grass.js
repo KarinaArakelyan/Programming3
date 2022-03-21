@@ -1,6 +1,6 @@
-var LivingCreature = require("./LivingCreature");
-
 //Xot
+
+var LivingCreature = require("./LivingCreature");
 
 module.exports = class Grass extends LivingCreature {
     mul() {
