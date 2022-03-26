@@ -68,7 +68,16 @@ function nkarel(matrix) {
 socket.on("send matrix", nkarel);
 
 
-socket.on('connection', function (socket) {
-    nkarel(matrix);
-});
+// socket.on('connection', function (socket) {
+//     nkarel(matrix);
+// });
                          
+function kill() {
+    socket.emit("kill");
+}
+function addGrass() {
+    socket.emit("add grass");
+}
+function addGrassEater() {
+    socket.emit("add grassEater");
+}

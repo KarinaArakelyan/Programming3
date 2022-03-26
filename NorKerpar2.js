@@ -76,12 +76,12 @@ module.exports = class NorKerpar extends LivingCreature {
                     predatorArr.splice(i, 1);
                     break;
                 }
-                if (newX == grassEaterArr[i].x && newY == grassEater[i].y) {
+                if (newX == grassEaterArr[i].x && newY == grassEaterArr[i].y) {
                     grassEaterArr[i].splice(i, 1);
                     break;
                 }
-                if (newX == grassArr[i].x && newY == grass[i].y) {
-                    grassEaterArr[i].splice(i, 1);
+                if (newX == grassArr[i].x && newY == grassArr[i].y) {
+                    grassArr[i].splice(i, 1);
                     break;
                 }
             }

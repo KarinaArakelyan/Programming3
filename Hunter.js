@@ -80,10 +80,10 @@ module.exports = class Hunter extends LivingCreature {
                     grassEaterArr.splice(i, 1);
                     break;
                 }
-                if (newX == predatorArr[i].x && newY == predatorArr[i].y) {
-                    predatorArr.splice(i, 1);
-                    break;
-                }
+                // if (newX == predatorArr[i].x && newY == predatorArr[i].y) {
+                //     predatorArr.splice(i, 1);
+                //     break;
+                // }
             }
         } else {
             this.move();
