@@ -9,27 +9,30 @@ app.use(express.static("."));
 app.get('/', function (req, res) {
     res.redirect('index.html');
 });
-server.listen(8000);
+server.listen(5050);
 
 //matrix
 n = 20;
 m = 20;
 matrix = [];
 
-for (let y = 0; y < n; y++) {
-    matrix[y] = [];
-    for (let x = 0; x < m; x++) {
-        let k = Math.floor(Math.random() * 100);
-        if (k >= 0 && k < 70) {
-            matrix[y][x] = 1;
-        } else if (k >= 83 && k < 86) {
-            matrix[y][x] = 2;
-        } else if (k >= 90 && k < 93) {
-            matrix[y][x] = 3;
-        } else if (k >= 93 && k < 94) {
-            matrix[y][x] = 4;
-        } else if (k >= 86 && k < 89) {
-            matrix[y][x] = 5;
+
+function matrixgenerate() {
+    for (let y = 0; y < n; y++) {
+        matrix[y] = [];
+        for (let x = 0; x < m; x++) {
+            let k = Math.floor(Math.random() * 100);
+            if (k >= 0 && k < 70) {
+                matrix[y][x] = 1;
+            } else if (k >= 83 && k < 86) {
+                matrix[y][x] = 2;
+            } else if (k >= 90 && k < 93) {
+                matrix[y][x] = 3;
+            } else if (k >= 93 && k < 94) {
+                matrix[y][x] = 4;
+            } else if (k >= 86 && k < 89) {
+                matrix[y][x] = 5;
+            }
         }
     }
 }
@@ -110,7 +113,8 @@ function game() {
 setInterval(game, 1000);
 
 io.on('connection', function (socket) {
-    createObject(matrix);
+    createObject();
+    matrixgenerate()
 });
 
 function kill() {
@@ -161,28 +165,16 @@ function addPredator() {
     io.sockets.emit("send matrix", matrix);
 }
 
-function addNewKerpar() {
-    for (var i = 0; i < 7; i++) {
-        var x = Math.floor(Math.random() * matrix[0].length);
-        var y = Math.floor(Math.random() * matrix.length);
-        if (matrix[y][x] == 0) {
-            matrix[y][x] = 4;
-            NewKerparArr.push(new NewKerpar(x, y));
-        }
-    }
-    io.sockets.emit("send matrix", matrix);
-}
+let weather = ['spring', 'summer', 'winter', 'autumn'];
+if()
 
-function addHunter() {
-    for (var i = 0; i < 7; i++) {
-        var x = Math.floor(Math.random() * matrix[0].length);
-        var y = Math.floor(Math.random() * matrix.length);
-        if (matrix[y][x] == 0) {
-            matrix[y][x] = 5;
-            HunterArr.push(new Hunter(x, y));
-        }
-    }
-    io.sockets.emit("send matrix", matrix);
+function weather(){
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+            if(weather == 'winter' && matrix[y][x] == 1) {
+                fill("#5cfcff");
+            }
+    io.sockets.emit('weather', weather)
 }
 
 io.on('connection', function (socket) {

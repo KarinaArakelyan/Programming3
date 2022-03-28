@@ -1,0 +1,36 @@
+body {
+    background-image: url("background.jpg");
+}
+
+h1 { 
+    color: #570313; 
+    font-family: "Great Vibes", cursive;
+    font-size: 85px; 
+    /* line-height: 160px; 
+    font-weight: normal;  */
+    margin-bottom: 0px; 
+    margin-top: 40px; 
+    text-align: center; 
+    text-shadow: 0 1px 1px rgb(136, 127, 127);
+}
+
+h2 {
+    color: rgb(0, 0, 0);
+    font-family: "Great Vibes", cursive;
+    font-size: 45px;
+    text-align: center; 
+    text-shadow: 0 1px 1px rgb(136, 127, 127);
+    right: 600px;
+}
+
+div {
+    padding-left: 1030px;
+}
+
+button {
+    color: rgb(0, 0, 0);
+    font-family: "Great Vibes", cursive;
+    font-size: 15px;
+    text-shadow: 0 1px 1px rgb(136, 127, 127);
+    /* margin-right: 600px; */
+}

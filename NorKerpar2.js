@@ -71,20 +71,41 @@ module.exports = class NorKerpar extends LivingCreature {
             this.x = newX;
             this.y = newY;
 
-            for (let i in predatorArr && grassEaterArr && grassArr) {
+            for (let i in predatorArr) {
                 if (newX == predatorArr[i].x && newY == predatorArr[i].y) {
                     predatorArr.splice(i, 1);
                     break;
                 }
+            }
+
+            for (let i in grassEaterArr) {
                 if (newX == grassEaterArr[i].x && newY == grassEaterArr[i].y) {
-                    grassEaterArr[i].splice(i, 1);
-                    break;
-                }
-                if (newX == grassArr[i].x && newY == grassArr[i].y) {
-                    grassArr[i].splice(i, 1);
+                    grassEaterArr.splice(i, 1);
                     break;
                 }
             }
+
+            for (let i in grassArr) {
+                if (newX == grassArr[i].x && newY == grassArr[i].y) {
+                    grassArr.splice(i, 1);
+                    break;
+                }
+            }
+
+            // for (let i in predatorArr && grassEaterArr && grassArr) {
+            //     if (newX == predatorArr[i].x && newY == predatorArr[i].y) {
+            //         predatorArr.splice(i, 1);
+            //         break;
+            //     }
+            //     if (newX == grassEaterArr[i].x && newY == grassEaterArr[i].y) {
+            //         grassEaterArr[i].splice(i, 1);
+            //         break;
+            //     }
+            //     if (newX == grassArr[i].x && newY == grassArr[i].y) {
+            //         grassArr.splice(i, 1);
+            //         break;
+            //     }
+            // }
         } else {
             this.move();
         }

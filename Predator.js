@@ -80,7 +80,6 @@ module.exports = class Predator extends LivingCreature {
                     grassEaterArr.splice(i, 1);
                     break;
                 }
-
             }
         } else {
             this.move();

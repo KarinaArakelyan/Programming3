@@ -1,5 +1,3 @@
-//Xot
-
 var LivingCreature = require("./LivingCreature");
 
 module.exports = class Grass extends LivingCreature {

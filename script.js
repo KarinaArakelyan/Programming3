@@ -3,28 +3,29 @@ let n = 20;
 let m = 20;
 
 
+
 var socket = io();
 
-for (let y = 0; y < n; y++) {
-    matrix[y] = [];
-    for (let x = 0; x < m; x++) {
-        let k = Math.floor(Math.random() * 100);
-        if (k >= 0 && k < 70) {
-            matrix[y][x] = 1;
-        } else if (k >= 83 && k < 86) {
-            matrix[y][x] = 2;
-        } else if (k >= 90 && k < 93) {
-            matrix[y][x] = 3;
-        } else if (k >= 93 && k < 94) {
-            matrix[y][x] = 4;
-        } else if (k >= 86 && k < 89) {
-            matrix[y][x] = 5;
-        }
-    }
-}
+// for (let y = 0; y < n; y++) {
+//     matrix[y] = [];
+//     for (let x = 0; x < m; x++) {
+//         let k = Math.floor(Math.random() * 100);
+//         if (k >= 0 && k < 70) {
+//             matrix[y][x] = 1;
+//         } else if (k >= 83 && k < 86) {
+//             matrix[y][x] = 2;
+//         } else if (k >= 90 && k < 93) {
+//             matrix[y][x] = 3;
+//         } else if (k >= 93 && k < 94) {
+//             matrix[y][x] = 4;
+//         } else if (k >= 86 && k < 89) {
+//             matrix[y][x] = 5;
+//         }
+//     }
+// }
 
 function setup() {
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    createCanvas(50 * side, 50 * side);
     background('#acacac');
     frameRate(10);
 }
@@ -35,7 +36,7 @@ let side = 20;
 function nkarel(matrix) {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0) {
+            if (matrix[y][x] == 0 ) {
                 fill("#acacac");
             }
             else if (matrix[y][x] == 1) {
@@ -67,11 +68,14 @@ function nkarel(matrix) {
 }
 socket.on("send matrix", nkarel);
 
+socket.on("weather", function (data){
+    weather = data;
+})
 
 // socket.on('connection', function (socket) {
 //     nkarel(matrix);
 // });
-                         
+
 function kill() {
     socket.emit("kill");
 }
@@ -80,4 +84,7 @@ function addGrass() {
 }
 function addGrassEater() {
     socket.emit("add grassEater");
+}
+function addPredator() {
+    socket.emit("add predator");
 }

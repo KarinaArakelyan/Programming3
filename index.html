@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>  
-    <script src="script.js"></script>
-
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Game of Life</h1>
+        <div class="tools" style="height: 300px; width: 300px;">
+            <h2>Events</h2>
+            <ul>
+                <li>
+                    <button onclick="kill()">Kill them all</button>
+                </li>
+                <li>
+                    <button onclick="addGrass()">Add grass</button>
+                </li>
+                <li>
+                    <button onclick="addGrassEater()">Add grass eater</button>
+                </li>
+                <li>
+                    <button onclick="addPredator()">Add predator</button>
+                </li>
+                <li>
+                    <button onclick="winter()" id="winter">Winter</button>
+                </li>
+            </ul>
+        </div>
+    </body>
 </html>

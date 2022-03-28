@@ -1,7 +1,5 @@
 var LivingCreature = require("./LivingCreature");
 
-/////Xotaker
-
 module.exports = class GrassEater extends LivingCreature {
     constructor(x, y) {
         super(x, y)
