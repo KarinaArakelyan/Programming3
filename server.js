@@ -11,6 +11,27 @@ app.get('/', function (req, res) {
 });
 server.listen(5050);
 
+// weather = ["spring", "summer", 'winter', 'autumn'];
+
+// function weath(){
+//     for(i in weather){
+
+//         if (weather[i] == "winter"){
+//             weather[i] = "spring";
+//         } else if (weather[i] == "spring"){
+//             weather[i] = "summer";
+//         } else if (weather[i] == "summer"){
+//             weather[i] = "autumn";
+//         } else if (weather[i] == "autumn"){
+//             weather[i] = "winter";
+//         }
+
+//     }
+//     io.sockets.emit('send matrix', matrix)
+// }
+// io.sockets.emit("weather", weather)
+// setInterval(weath, 5000);
+
 //matrix
 n = 20;
 m = 20;
@@ -38,9 +59,6 @@ function matrixgenerate() {
 }
 
 io.sockets.emit('send matrix', matrix);
-
-
-
 
 side = 20;
 grassArr = [];
@@ -159,22 +177,34 @@ function addPredator() {
         var y = Math.floor(Math.random() * matrix.length);
         if (matrix[y][x] == 0) {
             matrix[y][x] = 3;
-            PredatorArr.push(new HunterPredator(x, y));
+            PredatorArr.push(new Predator(x, y));
         }
     }
     io.sockets.emit("send matrix", matrix);
 }
 
-let weather = ['spring', 'summer', 'winter', 'autumn'];
-if()
+function addNewKerpar() {
+    for (var i = 0; i < 7; i++) {
+        var x = Math.floor(Math.random() * matrix[0].length);
+        var y = Math.floor(Math.random() * matrix.length);
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 3;
+            NewKerparArr.push(new NewKerpar(x, y));
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
 
-function weather(){
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; x++) {
-            if(weather == 'winter' && matrix[y][x] == 1) {
-                fill("#5cfcff");
-            }
-    io.sockets.emit('weather', weather)
+function addHunter() {
+    for (var i = 0; i < 7; i++) {
+        var x = Math.floor(Math.random() * matrix[0].length);
+        var y = Math.floor(Math.random() * matrix.length);
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 3;
+            HunterArr.push(new Hunter(x, y));
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
 }
 
 io.on('connection', function (socket) {

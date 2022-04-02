@@ -1,4 +1,4 @@
-let matrix = [];
+// let matrix = [];
 let n = 20;
 let m = 20;
 
@@ -24,19 +24,17 @@ var socket = io();
 //     }
 // }
 
-function setup() {
-    createCanvas(50 * side, 50 * side);
-    background('#acacac');
-    frameRate(10);
-}
-
-
 let side = 20;
+function setup() {
+    createCanvas(20 * side, 20 * side);
+    background('#acacac');
+    // frameRate(10);
+}
 
 function nkarel(matrix) {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0 ) {
+            if (matrix[y][x] == 0) {
                 fill("#acacac");
             }
             else if (matrix[y][x] == 1) {
@@ -49,12 +47,10 @@ function nkarel(matrix) {
                 fill("red");
             }
             else if (matrix[y][x] == 4) {
-                fill("purple");
-                console.log(matrix[y][x]);
+                fill("blue");
             }
             else if (matrix[y][x] == 5) {
-                fill("blue");
-                console.log(matrix[y][x]);
+                fill("purple");
             }
 
             rect(x * side, y * side, side, side);
@@ -67,10 +63,7 @@ function nkarel(matrix) {
     }
 }
 socket.on("send matrix", nkarel);
-
-socket.on("weather", function (data){
-    weather = data;
-})
+// socket.on("weather",nkarel)
 
 // socket.on('connection', function (socket) {
 //     nkarel(matrix);
